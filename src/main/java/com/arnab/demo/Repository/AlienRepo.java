@@ -1,4 +1,4 @@
-package com.arnab.demo.dao;
+package com.arnab.demo.Repository;
 
 import java.util.List;
 

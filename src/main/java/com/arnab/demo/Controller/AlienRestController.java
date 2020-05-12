@@ -1,9 +1,12 @@
-package com.arnab.demo.controller;
+package com.arnab.demo.Controller;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arnab.demo.Model.Alien;
-import com.arnab.demo.dao.AlienRepo;
+import com.arnab.demo.Service.AlienService;
 
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 public class AlienRestController {
-	
+
 	@Autowired
-	AlienRepo repo;
-	
+	AlienService alienService;
+
 	// REST Responses
 
 	/**
@@ -36,12 +39,12 @@ public class AlienRestController {
 	 * 
 	 * @return List<Alien>
 	 */
-	@ApiOperation(value = "It will list all aliens") // it description of api
 	// @RequestMapping(path = "/aliens", produces = { "application/xml" })
-	@GetMapping("/aliens")
 	// @ResponseBody
-	public List<Alien> getAliens() {
-		return repo.findAll();
+	@ApiOperation(value = "It will list all aliens") // it description of api
+	@GetMapping("/aliens")
+	public ResponseEntity<List<Alien>> getAliens() {
+		return ResponseEntity.status(HttpStatus.OK).body(alienService.findAll());
 	}
 
 	/**
@@ -51,11 +54,11 @@ public class AlienRestController {
 	 * @param aid
 	 * @return Optional<Alien>
 	 */
+	// @ResponseBody
 	@ApiOperation(value = "It will list an alien by id") // it description of api
 	@GetMapping("/alien/{aid}")
-	// @ResponseBody
-	public Optional<Alien> getAlienById(@PathVariable("aid") int aid) {
-		return repo.findById(aid);
+	public ResponseEntity<Optional<Alien>> getAlienById(@PathVariable("aid") int aid) {
+		return ResponseEntity.status(HttpStatus.OK).body(alienService.findById(aid));
 	}
 
 	/**
@@ -68,11 +71,11 @@ public class AlienRestController {
 	 * @return Alien
 	 */
 	// @PostMapping("/alien")
+	// @PostMapping(path = "/alien", consumes = { "application/json" })
 	@ApiOperation(value = "It will add new alien") // it description of api
-	@PostMapping(path = "/alien", consumes = { "application/json" })
-	public Alien addAlienByRest(@RequestBody Alien alien) {
-		repo.save(alien);
-		return alien;
+	@PostMapping(path = "/alien", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Alien> addAlienByRest(@RequestBody Alien alien) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(alienService.create(alien));
 	}
 
 	/**
@@ -83,26 +86,13 @@ public class AlienRestController {
 	 */
 	@ApiOperation(value = "It will delete alien") // it description of api
 	@DeleteMapping("/alien/{aid}")
-	public Optional<Alien> deleteAlien(@PathVariable("aid") int aid) {
-		Optional<Alien> alien = repo.findById(aid);
-		repo.deleteById(aid);
-		return alien;
+	public ResponseEntity<Optional<Alien>> deleteAlien(@PathVariable("aid") int aid) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(alienService.delete(aid));
 	}
 
 	@ApiOperation(value = "It will update an alien") // it description of api
 	@PutMapping("/alien")
-	public Alien updateAlien(@RequestBody Alien alien) {
-		Optional<Alien> alienOrig = repo.findById(alien.getAid());
-		Alien alteredAlien;
-		if (alienOrig.isPresent()) {
-			alteredAlien = alienOrig.get();
-			alteredAlien.setAid(alien.getAid());
-			alteredAlien.setAname(alien.getAname());
-			alteredAlien.setTech(alien.getTech());
-			repo.save(alteredAlien);
-		} else {
-			alteredAlien = null;
-		}
-		return alteredAlien;
+	public ResponseEntity<Alien> updateAlien(@RequestBody Alien alien) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(alienService.updateAlien(alien));
 	}
 }
