@@ -22,7 +22,7 @@ public class AlienServiceImpl implements AlienService {
 
 	@Override
 	public Optional<Alien> findById(int aid) {
-		return alienRepo.findById(aid);
+		return alienRepo.findById(101);
 	}
 
 	@Override
@@ -52,6 +52,16 @@ public class AlienServiceImpl implements AlienService {
 			alteredAlien = null;
 		}
 		return alteredAlien;
+	}
+
+	@Override
+	public Alien findByName(int aid) {
+		Optional<Alien> aln = alienRepo.findById(aid);
+		alienRepo.findById(new Integer(101));
+		Alien alien = aln.isPresent() ? aln.get() : null;
+		alien.setTech("cpp");
+		alienRepo.findById(new Integer(104));
+		return alien;
 	}
 
 }

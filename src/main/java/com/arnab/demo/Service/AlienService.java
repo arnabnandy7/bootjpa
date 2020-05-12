@@ -15,4 +15,6 @@ public interface AlienService {
 	Optional<Alien> delete(int aid);
 
 	Alien updateAlien(Alien alien);
+	
+	Alien findByName(int aid);
 }
