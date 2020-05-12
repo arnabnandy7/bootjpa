@@ -2,6 +2,8 @@ package com.arnab.demo.Repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import javax.servlet.ServletContext;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +18,7 @@ import com.arnab.demo.Model.Alien;
 public class AlienRepositoryTest {
 
 	Logger logger = LoggerFactory.getLogger(AlienRepositoryTest.class);
-
+	
 	@Autowired
 	private AlienRepository alienRepository;
 

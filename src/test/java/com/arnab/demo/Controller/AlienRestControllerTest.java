@@ -35,7 +35,7 @@ public class AlienRestControllerTest {
 		Alien alien = Alien.builder().aid(110).aname("Farhan").tech("Java").build();
 		when(alienService.create(alien)).thenReturn(alien);
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/").content(objectMapper.writeValueAsString(alien))
+				.perform(MockMvcRequestBuilders.post("/alien").content(objectMapper.writeValueAsString(alien))
 						.contentType(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.aid").value(alien.getAid()))
