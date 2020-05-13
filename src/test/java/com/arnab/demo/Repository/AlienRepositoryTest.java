@@ -1,6 +1,11 @@
 package com.arnab.demo.Repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -31,5 +36,12 @@ public class AlienRepositoryTest {
 		logger.info("-------:::::::Alien Created:::::::-------" + savedAlien.getAname());
 		alienRepository.findAll().forEach(alien -> logger.info("Alien----->" + alien.getAname()));
 		assertThat(savedAlien).isNotNull();
+	}
+
+	@Test
+	public void testFindByTechnology() {
+		int totalCountByTech = alienRepository.findByTech("java").size();
+		logger.error("count::" + totalCountByTech);
+		assertEquals(totalCountByTech, 3);
 	}
 }

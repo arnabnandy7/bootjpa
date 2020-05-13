@@ -5,6 +5,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -35,13 +37,13 @@ public class AlienServiceTest {
 	private AlienRepository alienRepository;
 
 	@Test
-	public void testFindByTechnology() {
+	public void testFindByNameOrId() {
 		// Stubbing
 		Alien alien = Alien.builder().aname("arnab").tech("java").aid(101).build();
 		Alien alien1 = Alien.builder().aname("arna1b").tech("java1").aid(104).build();
 		when(alienRepository.findById(101)).thenReturn(Optional.of(alien));
 		when(alienRepository.findById(104)).thenReturn(Optional.of(alien1));
-		
+
 		logger.error("alienWithName1::" + alien.getTech() + "::" + alien.getAid() + "::" + alien.getAname());
 		// Actual Call
 		Alien alienWithName = alienService.findByName(alien.getAid());
@@ -54,10 +56,11 @@ public class AlienServiceTest {
 
 		ArgumentCaptor<Integer> intArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
 		verify(alienRepository, times(3)).findById(intArgumentCaptor.capture());
-		
+
 		logger.error("Argument Captor::" + intArgumentCaptor.getAllValues());
 		assertEquals(new Integer(101), intArgumentCaptor.getAllValues().get(0));
 		assertEquals(new Integer(101), intArgumentCaptor.getAllValues().get(1));
 		assertEquals(new Integer(104), intArgumentCaptor.getAllValues().get(2));
 	}
+
 }
