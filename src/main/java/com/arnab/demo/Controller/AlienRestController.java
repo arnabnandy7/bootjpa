@@ -43,7 +43,7 @@ public class AlienRestController {
 	 */
 	// @RequestMapping(path = "/aliens", produces = { "application/xml" })
 	// @ResponseBody
-	@ApiOperation(value = "It will list all aliens") // it description of api
+	//@ApiOperation(value = "It will list all aliens") // it description of api
 	@GetMapping("/aliens")
 	public ResponseEntity<List<Alien>> getAliens() {
 		return ResponseEntity.status(HttpStatus.OK).body(alienService.findAll());
@@ -57,7 +57,7 @@ public class AlienRestController {
 	 * @return Optional<Alien>
 	 */
 	// @ResponseBody
-	@ApiOperation(value = "It will list an alien by id") // it description of api
+	//@ApiOperation(value = "It will list an alien by id") // it description of api
 	@GetMapping("/alien/{aid}")
 	public ResponseEntity<Optional<Alien>> getAlienById(@PathVariable("aid") int aid) {
 		return ResponseEntity.status(HttpStatus.OK).body(alienService.findById(aid));
@@ -74,7 +74,7 @@ public class AlienRestController {
 	 */
 	// @PostMapping("/alien")
 	// @PostMapping(path = "/alien", consumes = { "application/json" })
-	@ApiOperation(value = "It will add new alien") // it description of api
+	//@ApiOperation(value = "It will add new alien") // it description of api
 	@PostMapping(path = "/alien", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Alien> addAlienByRest(@RequestBody Alien alien) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(alienService.create(alien));
@@ -86,13 +86,13 @@ public class AlienRestController {
 	 * @param aid
 	 * @return Optional<Alien>
 	 */
-	@ApiOperation(value = "It will delete alien") // it description of api
+	//@ApiOperation(value = "It will delete alien") // it description of api
 	@DeleteMapping("/alien/{aid}")
 	public ResponseEntity<Optional<Alien>> deleteAlien(@PathVariable("aid") int aid) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(alienService.delete(aid));
 	}
 
-	@ApiOperation(value = "It will update an alien") // it description of api
+	//@ApiOperation(value = "It will update an alien") // it description of api
 	@PutMapping("/alien")
 	public ResponseEntity<Alien> updateAlien(@RequestBody Alien alien) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(alienService.updateAlien(alien));

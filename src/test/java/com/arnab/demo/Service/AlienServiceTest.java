@@ -1,6 +1,8 @@
 package com.arnab.demo.Service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -36,7 +38,10 @@ public class AlienServiceTest {
 	public void testFindByTechnology() {
 		// Stubbing
 		Alien alien = Alien.builder().aname("arnab").tech("java").aid(101).build();
-		when(alienRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(alien));
+		Alien alien1 = Alien.builder().aname("arna1b").tech("java1").aid(104).build();
+		when(alienRepository.findById(101)).thenReturn(Optional.of(alien));
+		when(alienRepository.findById(104)).thenReturn(Optional.of(alien1));
+		
 		logger.error("alienWithName1::" + alien.getTech() + "::" + alien.getAid() + "::" + alien.getAname());
 		// Actual Call
 		Alien alienWithName = alienService.findByName(alien.getAid());
@@ -48,8 +53,11 @@ public class AlienServiceTest {
 		assertEquals("cpp", alienWithName.getTech());
 
 		ArgumentCaptor<Integer> intArgumentCaptor = ArgumentCaptor.forClass(Integer.class);
+		verify(alienRepository, times(3)).findById(intArgumentCaptor.capture());
+		
 		logger.error("Argument Captor::" + intArgumentCaptor.getAllValues());
 		assertEquals(new Integer(101), intArgumentCaptor.getAllValues().get(0));
-		assertEquals(new Integer(104), intArgumentCaptor.getAllValues().get(1));
+		assertEquals(new Integer(101), intArgumentCaptor.getAllValues().get(1));
+		assertEquals(new Integer(104), intArgumentCaptor.getAllValues().get(2));
 	}
 }

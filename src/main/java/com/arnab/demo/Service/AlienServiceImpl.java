@@ -22,7 +22,7 @@ public class AlienServiceImpl implements AlienService {
 
 	@Override
 	public Optional<Alien> findById(int aid) {
-		return alienRepo.findById(101);
+		return alienRepo.findById(aid);
 	}
 
 	@Override
