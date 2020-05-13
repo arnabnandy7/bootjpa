@@ -2,12 +2,6 @@ package com.arnab.demo.Repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.ServletContext;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -19,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import com.arnab.demo.Model.Alien;
 
 @DataJpaTest
-//@ActiveProfiles("test")
+@ActiveProfiles("test")
 public class AlienRepositoryTest {
 
 	Logger logger = LoggerFactory.getLogger(AlienRepositoryTest.class);
