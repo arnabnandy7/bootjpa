@@ -24,7 +24,7 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 
 @Controller
-//@ApiIgnore
+@ApiIgnore
 public class AlienController {
 	
 	@Autowired

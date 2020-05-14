@@ -12,6 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.arnab.demo.Model.Alien;
 
+// Turn Off all Swagger2 annotations and configurations to execute this repository test case
+
 @DataJpaTest
 @ActiveProfiles("test")
 public class AlienRepositoryTest {

@@ -15,7 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-//@EnableSwagger2
+@EnableSwagger2
 public class BootjpaApplication {
 	// To check H2 database connect with http://localhost:8080/h2-console/
 	// Change the JDBC URL with jdbc:h2:mem:arnabjpa
@@ -24,13 +24,13 @@ public class BootjpaApplication {
 	private static final Logger logger = LoggerFactory.getLogger(BootjpaApplication.class);
 	
 	@Autowired
-	private Environment environment;
+	private Environment env;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BootjpaApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("com.arnab.demo.Controller")) // // Generate API of
@@ -39,6 +39,6 @@ public class BootjpaApplication {
 																						// defined package
 				.paths(PathSelectors.any()) // for all EndPoints
 				.build(); // create object
-	}*/
+	}
 
 }
