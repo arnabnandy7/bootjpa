@@ -1,10 +1,13 @@
 package com.arnab.demo.Controller;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -41,5 +44,8 @@ public class AlienRestControllerTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.aid").value(alien.getAid()))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.aname").value(alien.getAname()))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.tech").value(alien.getTech()));
+		
+		ArgumentCaptor<Alien> alienArgumentCaptor = ArgumentCaptor.forClass(Alien.class);
+		verify(alienService, times(1)).create(alienArgumentCaptor.capture());
 	}
 }
