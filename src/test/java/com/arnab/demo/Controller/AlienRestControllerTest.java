@@ -20,6 +20,21 @@ import com.arnab.demo.Model.Alien;
 import com.arnab.demo.Service.AlienService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * <strong>The test of AlienRestController class is a unit test as per the
+ * type.</strong> Difference between unit test and integration test case of
+ * controller is loading the entire application using @SpringBootTest. Now that
+ * is our integration testing. For @WebMvcTest and other slice annotation, we
+ * are only loading our application partially to test different units of our
+ * application. <br>
+ * <br>
+ * <strong>Reference</strong>
+ * :{@link https://medium.com/@thankgodukachukwu/unit-and-integrated-testing-spring-boot-and-junit-5-99b9745b782a}
+ * 
+ * @author arnab
+ *
+ */
+
 @WebMvcTest(AlienRestController.class)
 public class AlienRestControllerTest {
 
@@ -44,7 +59,7 @@ public class AlienRestControllerTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.aid").value(alien.getAid()))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.aname").value(alien.getAname()))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.tech").value(alien.getTech()));
-		
+
 		ArgumentCaptor<Alien> alienArgumentCaptor = ArgumentCaptor.forClass(Alien.class);
 		verify(alienService, times(1)).create(alienArgumentCaptor.capture());
 	}
