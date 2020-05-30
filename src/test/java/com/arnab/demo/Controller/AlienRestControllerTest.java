@@ -51,7 +51,10 @@ public class AlienRestControllerTest {
 	@Test
 	void testCreate() throws Exception {
 		// Stubbing
-		Alien alien = Alien.builder().aid(110).aname("Farhan").tech("Java").build();
+		Alien alien = new Alien();
+		alien.setAid(110);
+		alien.setAname("Farhan");
+		alien.setTech("Java");
 		when(alienService.create(alien)).thenReturn(alien);
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/alien").content(objectMapper.writeValueAsString(alien))

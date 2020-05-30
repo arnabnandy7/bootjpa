@@ -37,8 +37,16 @@ public class AlienServiceTest {
 	@Test
 	public void testFindByNameOrId() {
 		// Stubbing
-		Alien alien = Alien.builder().aname("arnab").tech("java").aid(101).build();
-		Alien alien1 = Alien.builder().aname("arna1b").tech("java1").aid(104).build();
+		Alien alien = new Alien();
+		Alien alien1 = new Alien();
+		alien.setAid(101);
+		alien.setAname("arnab");
+		alien.setTech("java");
+
+		alien1.setAid(104);
+		alien1.setAname("arna1b");
+		alien1.setTech("java1");
+
 		when(alienRepository.findById(101)).thenReturn(Optional.of(alien));
 		when(alienRepository.findById(104)).thenReturn(Optional.of(alien1));
 

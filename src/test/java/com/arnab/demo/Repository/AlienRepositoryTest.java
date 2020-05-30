@@ -25,8 +25,16 @@ public class AlienRepositoryTest {
 
 	@Test
 	public void testCreate() {
-		Alien alienToBeSaved = Alien.builder().aid(new Integer(110)).aname("sahid").tech("ruby").build();
-		Alien alienToBeSaved1 = Alien.builder().aid(new Integer(111)).aname("luis").tech("gcp").build();
+		Alien alienToBeSaved = new Alien();
+		Alien alienToBeSaved1 = new Alien();
+		alienToBeSaved.setAid(new Integer(110));
+		alienToBeSaved.setAname("sahid");
+		alienToBeSaved.setTech("ruby");
+		
+		alienToBeSaved.setAid(new Integer(111));
+		alienToBeSaved.setAname("luis");
+		alienToBeSaved.setTech("gcp");
+		
 		Alien savedAlien = alienRepository.save(alienToBeSaved);
 		alienRepository.save(alienToBeSaved1);
 		logger.info("-------:::::::Alien Created:::::::-------" + savedAlien.getAname());
