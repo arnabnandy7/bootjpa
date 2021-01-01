@@ -15,7 +15,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@EnableSwagger2
 public class BootjpaApplication {
 	// To check H2 database connect with http://localhost:8080/h2-console/
 	// Change the JDBC URL with jdbc:h2:mem:arnabjpa

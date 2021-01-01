@@ -27,11 +27,11 @@ public class AlienRepositoryTest {
 	public void testCreate() {
 		Alien alienToBeSaved = new Alien();
 		Alien alienToBeSaved1 = new Alien();
-		alienToBeSaved.setAid(new Integer(110));
+		alienToBeSaved.setAid(Integer.parseInt("110"));
 		alienToBeSaved.setAname("sahid");
 		alienToBeSaved.setTech("ruby");
 		
-		alienToBeSaved.setAid(new Integer(111));
+		alienToBeSaved.setAid(Integer.parseInt("111"));
 		alienToBeSaved.setAname("luis");
 		alienToBeSaved.setTech("gcp");
 		
